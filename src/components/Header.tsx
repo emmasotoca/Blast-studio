@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dna, FileText, Download, RotateCcw, ShieldCheck, Github } from 'lucide-react';
+import { Dna, FileText, Download, RotateCcw, ShieldCheck, Github, Rocket } from 'lucide-react';
 import { BlastResult } from '../types/blast';
 
 interface HeaderProps {
@@ -7,9 +7,16 @@ interface HeaderProps {
   onReset: () => void;
   onOpenExport: () => void;
   onOpenGithubGuide: () => void;
+  onOpenGithubPush: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ blastResult, onReset, onOpenExport, onOpenGithubGuide }) => {
+export const Header: React.FC<HeaderProps> = ({ 
+  blastResult, 
+  onReset, 
+  onOpenExport, 
+  onOpenGithubGuide,
+  onOpenGithubPush 
+}) => {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
@@ -74,12 +81,21 @@ export const Header: React.FC<HeaderProps> = ({ blastResult, onReset, onOpenExpo
           )}
 
           <button
+            onClick={onOpenGithubPush}
+            className="flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-3 py-1.5 text-xs font-semibold shadow-md shadow-cyan-900/30 transition ring-1 ring-cyan-400/40"
+            title="Pousser tous les fichiers directement vers GitHub"
+          >
+            <Rocket className="h-3.5 w-3.5" />
+            <span>Pousser vers GitHub</span>
+          </button>
+
+          <button
             onClick={onOpenGithubGuide}
             className="flex items-center gap-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white px-2.5 py-1.5 text-xs font-medium border border-slate-700 transition"
             title="Guide de déploiement automatique sur GitHub Pages"
           >
             <Github className="h-3.5 w-3.5 text-cyan-400" />
-            <span className="hidden sm:inline">Déployer sur GitHub</span>
+            <span className="hidden sm:inline">Guide Pages</span>
           </button>
 
           <div className="hidden md:flex items-center gap-1 text-[11px] text-slate-400 border-l border-slate-800 pl-3">

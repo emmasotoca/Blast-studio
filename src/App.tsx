@@ -21,12 +21,14 @@ import { HitsTable } from './components/HitsTable';
 import { AlignmentViewer } from './components/AlignmentViewer';
 import { ExportModal } from './components/ExportModal';
 import { GithubDeployGuideModal } from './components/GithubDeployGuideModal';
+import { GithubPushModal } from './components/GithubPushModal';
 
 export default function App() {
   const [blastResult, setBlastResult] = useState<BlastResult | null>(null);
   const [selectedHit, setSelectedHit] = useState<BlastHit | null>(null);
   const [isExportOpen, setIsExportOpen] = useState(false);
   const [isGithubGuideOpen, setIsGithubGuideOpen] = useState(false);
+  const [isGithubPushOpen, setIsGithubPushOpen] = useState(false);
 
   const [criteria, setCriteria] = useState<FilterCriteria>({
     maxEvalue: 10,
@@ -146,6 +148,7 @@ export default function App() {
         onReset={handleReset}
         onOpenExport={() => setIsExportOpen(true)}
         onOpenGithubGuide={() => setIsGithubGuideOpen(true)}
+        onOpenGithubPush={() => setIsGithubPushOpen(true)}
       />
 
       <main className="flex-1 pb-16">
@@ -265,6 +268,12 @@ export default function App() {
       <GithubDeployGuideModal
         isOpen={isGithubGuideOpen}
         onClose={() => setIsGithubGuideOpen(false)}
+      />
+
+      {/* GitHub In-App Push Modal */}
+      <GithubPushModal
+        isOpen={isGithubPushOpen}
+        onClose={() => setIsGithubPushOpen(false)}
       />
 
       {/* Footer */}
