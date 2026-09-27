@@ -1,0 +1,6 @@
+{
+  "name": "BLAST Studio - Analyseur & Visualiseur Bio-informatique",
+  "description": "Outil bio-informatique autonome d'analyse et de visualisation interactive des résultats BLAST (Tabulaire, XML, JSON, Pairwise outfmt 0) avec résumé graphique NCBI, filtres avancés et export.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
