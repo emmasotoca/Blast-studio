@@ -5,33 +5,32 @@
 
 ---
 
-## 🚀 Déploiement Automatique sur GitHub Pages (En 3 Étapes)
+## 🚀 Déploiement GitHub Pages : Guide de configuration
 
-Ce projet est **100% pré-configuré** pour GitHub Pages :
-- `base: './'` est configuré dans `vite.config.ts` (chargement garanti de tous les assets `.js`, `.css`, images et polices dans les sous-dossiers de GitHub Pages).
-- Le workflow GitHub Actions d'intégration continue est déjà présent sous `.github/workflows/deploy.yml`.
+### Étape 1 : Autoriser l'écriture pour les Workflows GitHub Actions (Important)
+Par défaut, GitHub applique un mode lecture seule aux tokens des actions :
+1. Allez sur votre dépôt GitHub : **`Settings`** (en haut à droite).
+2. Dans le menu de gauche, cliquez sur **`Actions`** > **`General`**.
+3. Descendez tout en bas jusqu'à la section **`Workflow permissions`**.
+4. Cochez **`Read and write permissions`** et cliquez sur **Save**.
 
-### Étape 1 : Poussez votre code vers GitHub
+### Étape 2 : Poussez votre code vers GitHub
 Dans votre terminal :
 ```bash
-git init
 git add .
-git commit -m "feat: Initialisation de BLAST Studio"
-git remote add origin https://github.com/VOTRE-PSEUDO/blast-studio.git
-git branch -M main
-git push -u origin main
+git commit -m "fix: Configuration déploiement automatique GitHub Pages"
+git push origin main
 ```
 
-### Étape 2 : Activez GitHub Pages dans les réglages
-1. Allez sur votre dépôt GitHub : `https://github.com/VOTRE-PSEUDO/blast-studio`
-2. Cliquez sur l'onglet **Settings** (Paramètres).
-3. Dans la colonne de gauche, cliquez sur **Pages**.
-4. Sous **Build and deployment > Source**, choisissez **GitHub Actions**.
+### Étape 3 : Activez la branche `gh-pages`
+Le workflow compile automatiquement l'application et crée la branche `gh-pages`.
+1. Allez sur votre dépôt : **`Settings`** > **`Pages`**.
+2. Sous **Build and deployment > Source**, sélectionnez **Deploy from a branch**.
+3. Choisissez la branche **`gh-pages`** et dossier **`/ (root)`**, puis cliquez sur **Save**.
 
-### Étape 3 : Votre application est en ligne ! 🎉
-Le workflow se déclenche automatiquement à chaque push sur `main`. En moins de 60 secondes, votre application est accessible publiquement à l'adresse :
+Votre application sera en ligne à l'adresse :
 ```
-https://VOTRE-PSEUDO.github.io/blast-studio/
+https://emmasotoca.github.io/Blast-studio/
 ```
 
 ---
@@ -73,8 +72,6 @@ https://VOTRE-PSEUDO.github.io/blast-studio/
 
 ## 💻 Développement Local
 
-Si vous souhaitez exécuter ou modifier l'application en local :
-
 ```bash
 # Installation des dépendances
 npm install
@@ -82,7 +79,7 @@ npm install
 # Démarrage du serveur de développement (port 3000)
 npm run dev
 
-# Compilation pour la production (vérification du build)
+# Compilation de production
 npm run build
 ```
 
