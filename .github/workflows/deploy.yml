@@ -8,11 +8,20 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
 
 jobs:
   build-and-deploy:
-    name: Compilation et Déploiement sur GitHub Pages
+    name: Compilation et Déploiement GitHub Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: 1. Récupération du code (Checkout)
@@ -29,15 +38,16 @@ jobs:
       - name: 4. Compilation du projet (Vite build)
         run: npm run build
 
-      - name: 5. Préparation des fichiers pour GitHub Pages (.nojekyll & 404.html)
+      - name: 5. Préparation .nojekyll et 404.html (compatibilité SPA)
         run: |
           touch dist/.nojekyll
           cp dist/index.html dist/404.html
 
-      - name: 6. Publication sur la branche gh-pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: 6. Téléversement de l'artefact GitHub Pages
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: gh-pages
-          force_orphan: true
+          path: './dist'
+
+      - name: 7. Déploiement sur GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
